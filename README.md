@@ -32,10 +32,6 @@ https://github.com/BestPig/gbdk-2020
 
 Also to make things clear, I'm not affiliated with `Analogue Inc` or `GB Studio`
 
-### Know bugs
-- Run not working (The embedded emulator can't run pocket file for the moment)
-- Export as web (Not working for the same reason as the previous one)
-
 ### Porting your game
 
 If you have ejected your engine, you have to modify some lines. \
