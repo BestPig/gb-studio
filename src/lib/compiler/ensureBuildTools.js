@@ -13,8 +13,8 @@ const ensureBuildTools = async () => {
   const expectedToolsVersion = await fs.readFile(expectedBuildToolsVersionPath, "utf8");
 
   const tmpPath = getTmp();
-  const tmpBuildToolsPath = `${tmpPath}/_gbstools`;
-  const tmpBuildToolsVersionPath = `${tmpPath}/_gbstools/tools_version`;
+  const tmpBuildToolsPath = `${tmpPath}/_gbstools_analogue`;
+  const tmpBuildToolsVersionPath = `${tmpPath}/_gbstools_analogue/tools_version`;
 
   // Symlink build tools so that path doesn't contain any spaces
   // GBDKDIR doesn't work if path has spaces :-(

@@ -1,4 +1,4 @@
-.LCDC = 0xFF40
+.LCDC = 0xFF4E
 .STAT = 0xFF41
 
 _SetTile::
@@ -12,7 +12,7 @@ _SetTile::
         ; while 0xff41 & 02 != 0 (cannot write)
     1$:
         ldh     a,(.STAT)
-        and     a, #0x02
+        and     a, #0x40
         jr      NZ,1$
 
         ; Write tile
@@ -23,18 +23,18 @@ _SetTile::
 _WaitForMode0Or1::
     1$:
         ldh     a,(.STAT)
-        and     a, #0x02
+        and     a, #0x40
         jr      NZ,1$
         ret
 
 _GetWinAddr::
         ldh     a,(.LCDC)
-        bit     6,a
+        bit     1,a
         jr      Z,.is98
         jr      .is9c
 _GetBkgAddr::
         ldh     a,(.LCDC)
-        bit     3,a
+        bit     4,a
         jr      NZ,.is9c
 .is98:
         ld      DE,#0x9800	; DE = origin

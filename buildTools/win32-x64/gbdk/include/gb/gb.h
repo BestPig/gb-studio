@@ -548,7 +548,7 @@ void hiramcpy(UINT8 dst,
     @see display_off, DISPLAY_OFF
 */
 #define DISPLAY_ON \
-  LCDC_REG|=0x80U
+  LCDC_REG|=0x01U
 
 /** Turns the display off immediatly.
     @see display_off, DISPLAY_ON
@@ -560,49 +560,49 @@ void hiramcpy(UINT8 dst,
     Sets bit 0 of the LCDC register to 1.
 */
 #define SHOW_BKG \
-  LCDC_REG|=0x01U
+  LCDC_REG|=0x80U
 
 /** Turns off the background layer.
     Sets bit 0 of the LCDC register to 0.
 */
 #define HIDE_BKG \
-  LCDC_REG&=0xFEU
+  LCDC_REG&=0x7fU
 
 /** Turns on the window layer
     Sets bit 5 of the LCDC register to 1.
 */
 #define SHOW_WIN \
-  LCDC_REG|=0x20U
+  LCDC_REG|=0x04U
 
 /** Turns off the window layer.
     Clears bit 5 of the LCDC register to 0.
 */
 #define HIDE_WIN \
-  LCDC_REG&=0xDFU
+  LCDC_REG&=0xfbU
 
 /** Turns on the sprites layer.
     Sets bit 1 of the LCDC register to 1.
 */
 #define SHOW_SPRITES \
-  LCDC_REG|=0x02U
+  LCDC_REG|=0x40U
 
 /** Turns off the sprites layer.
     Clears bit 1 of the LCDC register to 0.
 */
 #define HIDE_SPRITES \
-  LCDC_REG&=0xFDU
+  LCDC_REG&=0xbfU
 
 /** Sets sprite size to 8x16 pixels, two tiles one above the other.
     Sets bit 2 of the LCDC register to 1.
 */
 #define SPRITES_8x16 \
-  LCDC_REG|=0x04U
+  LCDC_REG|=0x20U
 
 /** Sets sprite size to 8x8 pixels, one tile.
     Clears bit 2 of the LCDC register to 0.
 */
 #define SPRITES_8x8 \
-  LCDC_REG&=0xFBU
+  LCDC_REG&=0xdfU
 
 
 

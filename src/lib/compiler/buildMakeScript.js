@@ -14,10 +14,10 @@ export default async (
   const objFiles = [];
 
   const CC = platform === "win32"
-    ? `..\\_gbstools\\gbdk\\bin\\lcc`
-    : `../_gbstools/gbdk/bin/lcc`;
+    ? `..\\_gbstools_analogue\\gbdk\\bin\\lcc`
+    : `../_gbstools_analogue/gbdk/bin/lcc`;
   let CFLAGS = `-Wa-l -Iinclude`;
-  let LFLAGS = `-Wl-yo${CART_SIZE} -Wa-l -Wl-m -Wl-j -Wl-yt${CART_TYPE} -Wl-ya4`;
+  let LFLAGS = `-Wl-yo${CART_SIZE} -Wa-l -Wl-m -Wl-j -Wl-yt${CART_TYPE} -Wl-ya4 -Wm-yN`;
 
   if (customColorsEnabled) {
     CFLAGS += " -DCGB";
@@ -56,8 +56,8 @@ export default async (
   }
 
   addCommand(
-    `${l10n("COMPILER_LINKING")}: game.gb`,
-    `${CC} ${LFLAGS} -o build/rom/game.gb ${objFiles.join(" ")}`
+    `${l10n("COMPILER_LINKING")}: game.pocket`,
+    `${CC} ${LFLAGS} -o build/rom/game.pocket ${objFiles.join(" ")}`
   );
 
   return cmds.join("\n")

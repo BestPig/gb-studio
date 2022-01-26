@@ -4,15 +4,15 @@ module.exports = {
     {
       name: "@electron-forge/maker-squirrel",
       config: {
-        name: "gb_studio",
-        exe: "gb-studio.exe",
+        name: "gb_studio-analogue",
+        exe: "gb-studio-analogue.exe",
         loadingGif: "src/assets/app/install.gif",
         setupIcon: "src/assets/app/icon/app_icon.ico",
       },
     },
     {
       name: "@electron-forge/maker-zip",
-      platforms: ["darwin", "win32"],
+      platforms: ["darwin", "win32", "win64"],
     },
     {
       name: "@electron-forge/maker-deb",
@@ -24,8 +24,8 @@ module.exports = {
     },
   ],
   packagerConfig: {
-    name: "GB Studio",
-    executableName: "gb-studio",
+    name: "GB Studio Analogue",
+    executableName: "gb-studio-analogue",
     packageManager: "yarn",
     icon: "src/assets/app/icon/app_icon",
     darwinDarkModeSupport: true,

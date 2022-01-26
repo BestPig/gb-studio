@@ -503,7 +503,7 @@ void main()
 
   disable_interrupts();
   DISPLAY_OFF;
-  LCDC_REG = 0x67;
+  LCDC_REG = 0xe6;
   /*
    * LCD        = Off
    * WindowBank = 0x9C00

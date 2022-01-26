@@ -98,7 +98,7 @@ int core_start() {
   display_off();
 
   // Init LCD
-  LCDC_REG = 0x67;
+  LCDC_REG = 0xe6;
 
   // Set interupt handlers
   add_VBL(vbl_update);
@@ -117,7 +117,7 @@ int core_start() {
   set_interrupts(VBL_IFLAG | TIM_IFLAG | LCD_IFLAG);
   enable_interrupts();
 
-  STAT_REG = 0x45;
+  STAT_REG = 0xA2;
 
   // Set palettes
   BGP_REG = OBP0_REG = 0xE4U;

@@ -73,7 +73,7 @@ const makeBuild = async ({
   const buildToolsPath = `${buildToolsRoot}/${process.platform}-${process.arch}`;
 
   const tmpPath = getTmp();
-  const tmpBuildToolsPath = `${tmpPath}/_gbstools`;
+  const tmpBuildToolsPath = `${tmpPath}/_gbstools_analogue`;
 
   // Symlink build tools so that path doesn't contain any spaces
   // GBDKDIR doesn't work if path has spaces :-(
@@ -169,7 +169,7 @@ const makeBuild = async ({
     child.on("close", async (code) => {
       if (code === 0) {
         await setROMTitle(
-          `${buildRoot}/build/rom/game.gb`,
+          `${buildRoot}/build/rom/game.pocket`,
           data.name.toUpperCase()
         );
         await cacheObjData(buildRoot, env);
