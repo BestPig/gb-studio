@@ -1,8 +1,6 @@
 # GB Studio 2 Beta (Analogue Pocket export)
 
 
-[![CircleCI](https://circleci.com/gh/chrismaltby/gb-studio/tree/develop.svg?style=shield)](https://circleci.com/gh/chrismaltby/gb-studio/tree/develop)
-
 Copyright (c) 2020 Chris Maltby, released under the [MIT license](https://opensource.org/licenses/MIT).
 
 Twitter: [@maltby](https://www.twitter.com/maltby) 
@@ -34,80 +32,17 @@ Also to make things clear, I'm not affiliated with `Analogue Inc` or `GB Studio`
 
 ### Porting your game
 
-If you have ejected your engine, you have to modify some lines. \
-Apply the following patch to make the engine runnable on Pocket.
+Patching the engine is no more required to get things working.
+Except if you add manually access to rLCDC and rSTAT register, in this case you need to patch them.
 
-⚠️ Note that this change will only works when building as a pocket file (With this modified GB Studio), so you have to revert this change if you want to build it again with the original GB Studio.
-
-```diff
-diff --git a/src/core/Core_Main.c b/src/core/Core_Main.c
-index d5b561d4..ba055d40 100644
---- a/src/core/Core_Main.c
-+++ b/src/core/Core_Main.c
-@@ -98,7 +98,7 @@ int core_start() {
-   display_off();
- 
-   // Init LCD
--  LCDC_REG = 0x67;
-+  LCDC_REG = 0xe6;
- 
-   // Set interupt handlers
-   add_VBL(vbl_update);
-@@ -117,7 +117,7 @@ int core_start() {
-   set_interrupts(VBL_IFLAG | TIM_IFLAG | LCD_IFLAG);
-   enable_interrupts();
- 
--  STAT_REG = 0x45;
-+  STAT_REG = 0xA2;
- 
-   // Set palettes
-   BGP_REG = OBP0_REG = 0xE4U;
-diff --git a/src/core/Scroll_a.s b/src/core/Scroll_a.s
-index 2064d674..99daa01e 100644
---- a/src/core/Scroll_a.s
-+++ b/src/core/Scroll_a.s
-@@ -1,4 +1,4 @@
--.LCDC = 0xFF40
-+.LCDC = 0xFF4E
- .STAT = 0xFF41
- 
- _SetTile::
-@@ -12,7 +12,7 @@ _SetTile::
-         ; while 0xff41 & 02 != 0 (cannot write)
-     1$:
-         ldh     a,(.STAT)
--        and     a, #0x02
-+        and     a, #0x40
-         jr      NZ,1$
- 
-         ; Write tile
-@@ -23,18 +23,18 @@ _SetTile::
- _WaitForMode0Or1::
-     1$:
-         ldh     a,(.STAT)
--        and     a, #0x02
-+        and     a, #0x40
-         jr      NZ,1$
-         ret
- 
- _GetWinAddr::
-         ldh     a,(.LCDC)
--        bit     6,a
-+        bit     1,a
-         jr      Z,.is98
-         jr      .is9c
- _GetBkgAddr::
-         ldh     a,(.LCDC)
--        bit     3,a
-+        bit     4,a
-         jr      NZ,.is9c
- .is98:
-         ld      DE,#0x9800     ; DE = origin
-```
+If this case, to patch thing you can find what must be changed here.
+https://github.com/treyturner/analogue-pocket-patches/blob/main/TUTORIAL.md
 
 ### Testing your game
 
-You can use an emulator that support pocket file like Emulicious. \
+*The embedded emulator now works with the pocket file*
+
+But you can still use an emulator that support pocket file like Emulicious. \
 https://emulicious.net/
 
 ## Beta builds
@@ -116,17 +51,17 @@ These builds reflects the latest changes from the `v2beta` branch and are update
 
 #### macOS
 
-[![MacOS](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=apple&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.1-analogue/gb-studio-analogue-v2beta5.1-darwin_x86_64.zip)
+[![MacOS](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=apple&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.2-analogue/gb-studio-analogue-v2beta5.2-darwin_x86_64.zip)
 
 #### Linux
 
-[![DEB](https://img.shields.io/static/v1.svg?label=&message=deb&color=blue&logo=Ubuntu&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.1-analogue/gb-studio-analogue_2.0.0-beta5.1_amd64.deb)
-[![RPM](https://img.shields.io/static/v1.svg?label=&message=RPM&color=blue&logo=linux&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.1-analogue/gb-studio-analogue-2.0.0.beta5.1.x86_64.rpm)
-[![TAR.GZ](https://img.shields.io/static/v1.svg?label=&message=tar.gz&color=blue&logo=Ubuntu&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.1-analogue/gb-studio-analogue-2.0.0.beta5.1.x86_64.tar.gz)
+[![DEB](https://img.shields.io/static/v1.svg?label=&message=deb&color=blue&logo=Ubuntu&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.2-analogue/gb-studio-analogue_2.0.0-beta5.2_amd64.deb)
+[![RPM](https://img.shields.io/static/v1.svg?label=&message=RPM&color=blue&logo=linux&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.2-analogue/gb-studio-analogue-2.0.0.beta5.2.x86_64.rpm)
+[![TAR.GZ](https://img.shields.io/static/v1.svg?label=&message=tar.gz&color=blue&logo=Ubuntu&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.2-analogue/gb-studio-analogue-2.0.0.beta5.2.x86_64.tar.gz)
 #### Windows
 
-[![Windows_x86_64](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.1-analogue/gb-studio-analogue-v2beta5.1-windows_x86_64.zip)
-[![Windows_x86](https://img.shields.io/static/v1.svg?label=&message=32%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.1-analogue/gb-studio-analogue-v2beta5.1-windows_x86.zip)
+[![Windows_x86_64](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.2-analogue/gb-studio-analogue-v2beta5.2-windows_x86_64.zip)
+[![Windows_x86](https://img.shields.io/static/v1.svg?label=&message=32%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v2.0.0-beta5.2-analogue/gb-studio-analogue-v2beta5.2-windows_x86.zip)
 
 ## Installation
 

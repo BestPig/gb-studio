@@ -57,7 +57,15 @@ export default async (
 
   addCommand(
     `${l10n("COMPILER_LINKING")}: game.pocket`,
-    `${CC} ${LFLAGS} -o build/rom/game.pocket ${objFiles.join(" ")}`
+    `${CC} ${LFLAGS} -o build/rom/game.pocket ${objFiles.join(" ")}`,
+  );
+
+  const POCKET_FIX = platform === "win32"
+  ? `..\\_gbstools_analogue\\gbdk\\bin\\pocket_fix`
+  : `../_gbstools_analogue/gbdk/bin/pocket_fix`;
+  addCommand(
+    `Pocket Fix: build/rom/game.pocket`,
+    `${POCKET_FIX} build/rom/game.pocket`
   );
 
   return cmds.join("\n")

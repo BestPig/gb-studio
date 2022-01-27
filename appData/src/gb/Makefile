@@ -50,7 +50,8 @@ $(OBJDIR)/%.o:	src/core/%.s
 
 $(ROM_BUILD_DIR)/%.pocket:	$(OBJS)
 	mkdir -p $(ROM_BUILD_DIR)
-	$(CC) $(LFLAGS) -Iinclude -o $@ $^	
+	$(CC) $(LFLAGS) -Iinclude -o $@ $^
+	pocket_fix $@
 
 clean:
 	echo $(dir)
