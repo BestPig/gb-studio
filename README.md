@@ -70,16 +70,16 @@ These builds reflects the latest changes from the `develop` branch and are updat
 
 #### macOS
 
-[![MacOS](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=apple&style=for-the-badge&logoColor=white)](https://github.com/chrismaltby/gb-studio/releases/download/v1.2.2-analogue/gb-studio-develop-darwin_x86_64.zip)
+[![MacOS](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=apple&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v1.2.2-1-analogue/gb-studio-develop-darwin_x86_64.zip)
 
 #### Linux
 
-[![DEB](https://img.shields.io/static/v1.svg?label=&message=deb&color=blue&logo=Ubuntu&style=for-the-badge&logoColor=white)](https://github.com/chrismaltby/gb-studio/releases/download/v1.2.2-analogue/gb-studio-develop-linux_x86_64.deb)
-[![RPM](https://img.shields.io/static/v1.svg?label=&message=RPM&color=blue&logo=linux&style=for-the-badge&logoColor=white)](https://github.com/chrismaltby/gb-studio/releases/download/v1.2.2-analogue/gb-studio-develop-linux_x86_64.rpm)
-[![TAR.GZ](https://img.shields.io/static/v1.svg?label=&message=RPM&color=blue&logo=linux&style=for-the-badge&logoColor=white)](https://github.com/chrismaltby/gb-studio/releases/download/v1.2.2-analogue/gb-studio-develop-linux_x86_64.tar.gz)
+[![DEB](https://img.shields.io/static/v1.svg?label=&message=deb&color=blue&logo=Ubuntu&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v1.2.2-1-analogue/gb-studio-develop-linux_x86_64.deb)
+[![RPM](https://img.shields.io/static/v1.svg?label=&message=RPM&color=blue&logo=linux&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v1.2.2-1-analogue/gb-studio-develop-linux_x86_64.rpm)
+[![TAR.GZ](https://img.shields.io/static/v1.svg?label=&message=RPM&color=blue&logo=linux&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v1.2.2-1-analogue/gb-studio-develop-linux_x86_64.tar.gz)
 
 #### Windows
 
-[![Windows_x86_64](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/chrismaltby/gb-studio/releases/download/v1.2.2-analogue/gb-studio-develop-windows_x86_64.zip)
-[![Windows_x86](https://img.shields.io/static/v1.svg?label=&message=32%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/chrismaltby/gb-studio/releases/download/v1.2.2-analogue/gb-studio-develop-windows_x86.zip)
+[![Windows_x86_64](https://img.shields.io/static/v1.svg?label=&message=64%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v1.2.2-1-analogue/gb-studio-develop-windows_x86_64.zip)
+[![Windows_x86](https://img.shields.io/static/v1.svg?label=&message=32%20bit&color=blue&logo=windows&style=for-the-badge&logoColor=white)](https://github.com/BestPig/gb-studio/releases/download/v1.2.2-1-analogue/gb-studio-develop-windows_x86.zip)
 
