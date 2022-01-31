@@ -9,7 +9,7 @@ const ensureBuildTools = async () => {
   }`;
 
   const tmpPath = getTmp();
-  const tmpBuildToolsPath = `${tmpPath}/_gbs`;
+  const tmpBuildToolsPath = `${tmpPath}/_gbs_analogue`;
 
   // Symlink build tools so that path doesn't contain any spaces
   // GBDKDIR doesn't work if path has spaces :-(

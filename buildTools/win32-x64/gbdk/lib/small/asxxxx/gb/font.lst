@@ -61,7 +61,7 @@
                     0024     59 	.NR50		= 0x24	; Sound register
                     0025     60 	.NR51		= 0x25	; Sound register
                     0026     61 	.NR52		= 0x26	; Sound register
-                    0040     62 	.LCDC		= 0x40	; LCD control
+                    004E     62 	.LCDC		= 0x4E	; LCD control
                     0041     63 	.STAT		= 0x41	; LCD status
                     0042     64 	.SCY		= 0x42	; Scroll Y
                     0043     65 	.SCX		= 0x43	; Scroll X
@@ -205,13 +205,13 @@
    000F 15                   45 	dec	d
    0010                      46 1$:
    0010 F0 41                47 	ldh	a,(.STAT)
-   0012 CB 4F                48 	bit	1,a
+   0012 CB 77                48 	bit	6,a
    0014 20 FA                49 	jr	nz,#.-4
    0016 0A                   50 	ld	a,(bc)
    0017 22                   51 	ld	(hl+),a
    0018 03                   52 	inc	bc
    0019 F0 41                53 	ldh	a,(.STAT)
-   001B CB 4F                54 	bit	1,a
+   001B CB 77                54 	bit	6,a
    001D 20 FA                55 	jr	nz,#.-4
    001F 0A                   56 	ld	a,(bc)
    0020 77                   57 	ld	(hl),a
@@ -272,12 +272,12 @@
    006B 4F                  112 	ld	c,a
    006C                     113 font_copy_compressed_grey2:
    006C F0 41               114 	ldh	a,(.STAT)
-   006E CB 4F               115 	bit	1,a
+   006E CB 77               115 	bit	6,a
    0070 20 FA               116 	jr	nz,#.-4
    0072 70                  117 	ld	(hl),b
    0073 23                  118 	inc	hl
    0074 F0 41               119 	ldh	a,(.STAT)
-   0076 CB 4F               120 	bit	1,a
+   0076 CB 77               120 	bit	6,a
    0078 20 FA               121 	jr	nz,#.-4
    007A 71                  122 	ld	(hl),c
    007B 23                  123 	inc	hl
@@ -334,10 +334,10 @@
    00C6 EAr03s00            174 	ld	(font_first_free_tile),a
    00C9 E1                  175 	pop	hl
    00CA                     176 font_load_exit:
-   00CA F0 40               177 	LDH	A,(.LCDC)
+   00CA F0 4E               177 	LDH	A,(.LCDC)
    00CC F6 81               178 	OR	#0b10000001
    00CE E6 E7               179 	AND	#0b11100111
-   00D0 E0 40               180 	LDH	(.LCDC),A
+   00D0 E0 4E               180 	LDH	(.LCDC),A
    00D2 C9                  181 	RET	
    00D3                     182 font_copy_current::
    00D3 21r01s00            183 	ld	hl,#font_current+sfont_handle_font
@@ -470,7 +470,7 @@
    0194 01 00 98            310 	LD	BC,#0x9800
    0197 09                  311 	ADD	HL,BC
    0198 F0 41               312 	ldh	a,(.STAT)
-   019A CB 4F               313 	bit	1,a
+   019A CB 77               313 	bit	6,a
    019C 20 FA               314 	jr	nz,#.-4
    019E 73                  315 	LD	(HL),E
    019F E1                  316 	POP	HL
@@ -546,7 +546,7 @@
    01E9 16 20               386 	LD	D,#0x20
    01EB                     387 2$:
    01EB F0 41               388 	ldh	a,(.STAT)
-   01ED CB 4F               389 	bit	1,a
+   01ED CB 77               389 	bit	6,a
    01EF 20 FA               390 	jr	nz,#.-4
    01F1 36 00               391 	LD	(HL),#.SPACE
    01F3 23                  392 	INC	HL
@@ -661,7 +661,7 @@
    0262 16 20               501 	LD	D,#0x20
    0264                     502 2$:
    0264 F0 41               503 	LDH	A,(.STAT)
-   0266 E6 02               504 	AND	#0x02
+   0266 E6 40               504 	AND	#0x40
    0268 20 FA               505 	JR	NZ,2$
    026A 0A                  506 	LD	A,(BC)
    026B 22                  507 	LD	(HL+),A
@@ -673,7 +673,7 @@
    0273 16 20               513 	LD	D,#0x20
    0275                     514 3$:
    0275 F0 41               515 	LDH	A,(.STAT)
-   0277 E6 02               516 	AND	#0x02
+   0277 E6 40               516 	AND	#0x40
    0279 20 FA               517 	JR	NZ,3$
    027B 3E 00               518 	LD	A,#.SPACE
    027D 22                  519 	LD	(HL+),A
@@ -696,8 +696,8 @@
                             536 	.globl	.remove_int
    0285                     537 .tmode::
    0285 F3                  538 	DI	
-   0286 F0 40               539 	LDH	A,(.LCDC)
-   0288 CB 7F               540 	BIT	7,A
+   0286 F0 4E               539 	LDH	A,(.LCDC)
+   0288 CB 47               540 	BIT	0,A
    028A 28 15               541 	JR	Z,1$
    028C CDr00s00            542 	CALL	.display_off
    028F 01r00s00            543 	LD	BC,#.vbl
@@ -708,10 +708,10 @@
    029E CDr00s00            548 	CALL	.remove_int
    02A1                     549 1$:
    02A1 CDrAEs02            550 	CALL	.tmode_out
-   02A4 F0 40               551 	LDH	A,(.LCDC)
+   02A4 F0 4E               551 	LDH	A,(.LCDC)
    02A6 F6 81               552 	OR	#0b10000001
    02A8 E6 E7               553 	AND	#0b11100111
-   02AA E0 40               554 	LDH	(.LCDC),A
+   02AA E0 4E               554 	LDH	(.LCDC),A
    02AC FB                  555 	EI	
    02AD C9                  556 	RET	
    02AE                     557 .tmode_out::

@@ -19,7 +19,7 @@ $(OBJ_DIR)/%.o:	$(SOURCE_DIR)/%.c
 $(OBJ_DIR)/%.o:	$(SOURCE_DIR)/%.s
 	$(CC) -c -o $@ $<
 
-$(ROM_BUILD_DIR)/%.gb:  $(OBJS)
+$(ROM_BUILD_DIR)/%.pocket:  $(OBJS)
 	mkdir -p $(ROM_BUILD_DIR)
 	$(CC) $(CFLAGS) -o $@ $^	
 
@@ -30,4 +30,4 @@ clean:
 	rm -rf obj/*.lst
 	rm -rf obj/data/*.lst
 
-rom: $(ROM_BUILD_DIR)/game.gb
+rom: $(ROM_BUILD_DIR)/game.pocket

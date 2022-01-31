@@ -7,7 +7,7 @@
 .init_vram::
 1$:
 	LDH	A,(.STAT)
-	AND	#0x02
+	AND	#0x40
 	JR	NZ,1$
 
 	LD	(HL),B
@@ -20,7 +20,7 @@
 	;; Initialize window tile table with B
 .init_wtt::
 	LDH	A,(.LCDC)
-	BIT	6,A
+	BIT	1,A
 	JR	NZ,1$
 	LD	HL,#0x9800	; HL = origin
 	JR	.init_tt
@@ -30,7 +30,7 @@
 	;; Initialize background tile table with B
 .init_btt::
 	LDH	A,(.LCDC)
-	BIT	3,A
+	BIT	4,A
 	JR	NZ,1$
 	LD	HL,#0x9800	; HL = origin
 	JR	.init_tt

@@ -68,7 +68,7 @@
                     0024     59 	.NR50		= 0x24	; Sound register
                     0025     60 	.NR51		= 0x25	; Sound register
                     0026     61 	.NR52		= 0x26	; Sound register
-                    0040     62 	.LCDC		= 0x40	; LCD control
+                    004E     62 	.LCDC		= 0x4E	; LCD control
                     0041     63 	.STAT		= 0x41	; LCD status
                     0042     64 	.SCY		= 0x42	; Scroll Y
                     0043     65 	.SCX		= 0x43	; Scroll X
@@ -236,8 +236,8 @@
    0000 F3                   76 	DI			; Disable interrupts
                              77 
                              78 	;; Turn the screen off
-   0001 F0 40                79 	LDH	A,(.LCDC)
-   0003 CB 7F                80 	BIT	7,A
+   0001 F0 4E                79 	LDH	A,(.LCDC)
+   0003 CB 47                80 	BIT	0,A
    0005 28 03                81 	JR	Z,1$
                              82 
                              83 	;; Turn the screen off
@@ -257,7 +257,7 @@
    0021 3E 48                97 	LD	A,#72		; Set line at which LCD interrupt occurs
    0023 E0 45                98 	LDH	(.LYC),A
                              99 
-   0025 3E 44               100 	LD	A,#0b01000100	; Set LCD interrupt to occur when LY = LCY
+   0025 3E 22               100 	LD	A,#0b00100010	; Set LCD interrupt to occur when LY = LCY
    0027 E0 41               101 	LDH	(.STAT),A
                             102 
    0029 F0 FF               103 	LDH	A,(.IE)
@@ -285,12 +285,12 @@
    0042 20 F5               125 	JR	NZ,2$
                             126 
                             127 	;; Turn the screen on
-   0044 F0 40               128 	LDH	A,(.LCDC)
-   0046 F6 91               129 	OR	#0b10010001	; LCD		= On
+   0044 F0 4E               128 	LDH	A,(.LCDC)
+   0046 F6 89               129 	OR	#0b10001001	; LCD		= On
                             130 				; BG Chr	= 0x8000
                             131 				; BG		= On
-   0048 E6 F7               132 	AND	#0b11110111	; BG Bank	= 0x9800
-   004A E0 40               133 	LDH	(.LCDC),A
+   0048 E6 EF               132 	AND	#0b11101111	; BG Bank	= 0x9800
+   004A E0 4E               133 	LDH	(.LCDC),A
                             134 
    004C 3E 01               135 	LD	A,#.G_MODE
    004E EAr00s00            136 	LD	(.mode),A
@@ -308,9 +308,9 @@
    0061 C9                  148 	RET
                             149 
    0062                     150 .vbl::
-   0062 F0 40               151 	LDH	A,(.LCDC)
-   0064 F6 10               152 	OR	#0b00010000	; Set BG Chr to 0x8000
-   0066 E0 40               153 	LDH	(.LCDC),A
+   0062 F0 4E               151 	LDH	A,(.LCDC)
+   0064 F6 08               152 	OR	#0b00001000	; Set BG Chr to 0x8000
+   0066 E0 4E               153 	LDH	(.LCDC),A
                             154 
    0068 3E 48               155 	LD	A,#72		; Set line at which LCD interrupt occurs
    006A E0 45               156 	LDH	(.LYC),A
@@ -321,12 +321,12 @@
    006D                     161 .lcd::
    006D                     162 1$:
    006D F0 41               163 	LDH	A,(.STAT)
-   006F CB 4F               164 	BIT	1,A
+   006F CB 77               164 	BIT	6,A
    0071 20 FA               165 	JR	NZ,1$
                             166 
-   0073 F0 40               167 	LDH	A,(.LCDC)
-   0075 E6 EF               168 	AND	#0b11101111	; Set BG Chr to 0x8800
-   0077 E0 40               169 	LDH	(.LCDC),A
+   0073 F0 4E               167 	LDH	A,(.LCDC)
+   0075 E6 F7               168 	AND	#0b11110111	; Set BG Chr to 0x8800
+   0077 E0 4E               169 	LDH	(.LCDC),A
                             170 
    0079 C9                  171 	RET
                             172 
@@ -1469,7 +1469,7 @@
    0575 1E 00              1309 	LD	E,#0x00
    0577                    1310 3$:
    0577 F0 41              1311 	LDH	A,(.STAT)
-   0579 CB 4F              1312 	BIT	1,A
+   0579 CB 77              1312 	BIT	6,A
    057B 20 FA              1313 	JR	NZ,3$
                            1314 
    057D 7E                 1315 	LD	A,(HL)
@@ -1507,7 +1507,7 @@
    0595 0E 00              1347 	LD      C,#0x00
    0597                    1348 12$:
    0597 F0 41              1349 	LDH     A,(.STAT)
-   0599 CB 4F              1350 	BIT     1,A
+   0599 CB 77              1350 	BIT     6,A
    059B 20 FA              1351 	JR      NZ,12$
                            1352 
    059D 7E                 1353 	LD      A,(HL)
@@ -1539,7 +1539,7 @@
    05AF 0E 00              1379 	LD      C,#0x00
    05B1                    1380 22$:
    05B1 F0 41              1381 	LDH     A,(.STAT)
-   05B3 CB 4F              1382 	BIT     1,A
+   05B3 CB 77              1382 	BIT     6,A
    05B5 20 FA              1383 	JR      NZ,22$
                            1384 
    05B7 7E                 1385 	LD      A,(HL)
@@ -1571,7 +1571,7 @@
    05C9 0E FF              1411 	LD      C,#0xFF
    05CB                    1412 32$:
    05CB F0 41              1413 	LDH     A,(.STAT)
-   05CD CB 4F              1414 	BIT     1,A
+   05CD CB 77              1414 	BIT     6,A
    05CF 20 FA              1415 	JR      NZ,32$
                            1416 
    05D1 7E                 1417 	LD      A,(HL)
@@ -1611,7 +1611,7 @@
                            1451 
    05F3                    1452 gp$:
    05F3 F0 41              1453 	LDH	A,(.STAT)
-   05F5 CB 4F              1454 	BIT	1,A
+   05F5 CB 77              1454 	BIT	6,A
    05F7 20 FA              1455 	JR	NZ,gp$
                            1456 
    05F9 2A                 1457 	LD	A,(HL+)
@@ -1738,7 +1738,7 @@
                            1578 	.endif
    0660                    1579 chrwait$:
    0660 F0 41              1580 	LDH	A,(.STAT)
-   0662 CB 4F              1581 	BIT	1,A
+   0662 CB 77              1581 	BIT	6,A
    0664 20 FA              1582 	JR	NZ,chrwait$
                            1583 
    0666 7A                 1584 	LD	A,D

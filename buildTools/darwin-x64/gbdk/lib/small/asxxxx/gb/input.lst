@@ -60,7 +60,7 @@
                     0024     59 	.NR50		= 0x24	; Sound register
                     0025     60 	.NR51		= 0x25	; Sound register
                     0026     61 	.NR52		= 0x26	; Sound register
-                    0040     62 	.LCDC		= 0x40	; LCD control
+                    004E     62 	.LCDC		= 0x4E	; LCD control
                     0041     63 	.STAT		= 0x41	; LCD status
                     0042     64 	.SCY		= 0x42	; Scroll Y
                     0043     65 	.SCX		= 0x43	; Scroll X
@@ -225,8 +225,8 @@
    0000 F3                   65 	DI			; Disable interrupts
                              66 
                              67 	;; Turn the screen off
-   0001 F0 40                68 	LDH	A,(.LCDC)
-   0003 CB 7F                69 	BIT	7,A
+   0001 F0 4E                68 	LDH	A,(.LCDC)
+   0003 CB 47                69 	BIT	0,A
    0005 28 03                70 	JR	Z,1$
                              71 
                              72 	;; Turn the screen off
@@ -273,7 +273,7 @@
    0059 E0 48               113 	LDH	(.OBP0),A
                             114 
                             115 	;; Turn the screen on
-   005B 3E C1               116 	LD	A,#0b11000001	; LCD		= On
+   005B 3E 83               116 	LD	A,#0b10000011	; LCD		= On
                             117 				; WindowBank	= 0x9C00
                             118 				; Window	= Off
                             119 				; BG Chr	= 0x8800
@@ -281,7 +281,7 @@
                             121 				; OBJ		= 8x8
                             122 				; OBJ		= Off
                             123 				; BG		= On
-   005D E0 40               124 	LDH	(.LCDC),A
+   005D E0 4E               124 	LDH	(.LCDC),A
                             125 
    005F 3E 03               126 	LD	A,#.T_MODE_INOUT
    0061 EAr00s00            127 	LD	(.mode),A
@@ -435,9 +435,9 @@
    00E6                     275 .show_kbd:
    00E6 C5                  276 	PUSH	BC
    00E7 D5                  277 	PUSH	DE
-   00E8 F0 40               278 	LDH	A,(.LCDC)
+   00E8 F0 4E               278 	LDH	A,(.LCDC)
    00EA F6 20               279 	OR	#0b00100000	; Window = On
-   00EC E0 40               280 	LDH	(.LCDC),A
+   00EC E0 4E               280 	LDH	(.LCDC),A
    00EE 3E 8F               281 	LD	A,#.MAXWNDPOSY	; Show window
    00F0                     282 1$:
    00F0 CB 47               283 	BIT	0,A		; Wait for VBL every 2 pixels (slow down)
@@ -473,9 +473,9 @@
    0118 3C                  313 	INC	A
    0119 18 EE               314 	JR	1$
    011B                     315 3$:
-   011B F0 40               316 	LDH	A,(.LCDC)
-   011D E6 DF               317 	AND	#0b11011111	; Window = Off
-   011F E0 40               318 	LDH	(.LCDC),A
+   011B F0 4E               316 	LDH	A,(.LCDC)
+   011D E6 FB               317 	AND	#0b11111011	; Window = Off
+   011F E0 4E               318 	LDH	(.LCDC),A
    0121 D1                  319 	POP	DE
    0122 C1                  320 	POP	BC
    0123 C9                  321 	RET
@@ -542,15 +542,15 @@
    0172 3E 0A               382 	LD	A,#.INIMSPOSY
    0174 EAr01s00            383 	LD	(.msy),A
    0177 CDr2Cs02            384 	CALL	.set_mouse
-   017A F0 40               385 	LDH	A,(.LCDC)
-   017C F6 02               386 	OR	#0b00000010	; OBJ = On
-   017E E0 40               387 	LDH	(.LCDC),A
+   017A F0 4E               385 	LDH	A,(.LCDC)
+   017C F6 40               386 	OR	#0b01000000	; OBJ = On
+   017E E0 4E               387 	LDH	(.LCDC),A
    0180 C9                  388 	RET
                             389 
    0181                     390 .hide_mouse:
-   0181 F0 40               391 	LDH	A,(.LCDC)
-   0183 E6 FD               392 	AND	#0b11111101	; OBJ = Off
-   0185 E0 40               393 	LDH	(.LCDC),A
+   0181 F0 4E               391 	LDH	A,(.LCDC)
+   0183 E6 BF               392 	AND	#0b10111111	; OBJ = Off
+   0185 E0 4E               393 	LDH	(.LCDC),A
    0187 C9                  394 	RET
                             395 
    0188                     396 .track_mouse:

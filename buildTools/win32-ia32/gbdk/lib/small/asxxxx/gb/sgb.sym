@@ -39,7 +39,7 @@ Symbol Table
     .JOY_IFLAG                      =  0010 
     .JUMP                           =  0012 
     .KEY1                           =  004D 
-    .LCDC                           =  0040 
+    .LCDC                           =  004E 
     .LCD_IFLAG                      =  0002 
     .LEFT                           =  0002 
     .LY                             =  0044 

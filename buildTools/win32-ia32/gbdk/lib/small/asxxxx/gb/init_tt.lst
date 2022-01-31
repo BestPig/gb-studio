@@ -60,7 +60,7 @@
                     0024     59 	.NR50		= 0x24	; Sound register
                     0025     60 	.NR51		= 0x25	; Sound register
                     0026     61 	.NR52		= 0x26	; Sound register
-                    0040     62 	.LCDC		= 0x40	; LCD control
+                    004E     62 	.LCDC		= 0x4E	; LCD control
                     0041     63 	.STAT		= 0x41	; LCD status
                     0042     64 	.SCY		= 0x42	; Scroll Y
                     0043     65 	.SCX		= 0x43	; Scroll X
@@ -167,7 +167,7 @@
    0000                       7 .init_vram::
    0000                       8 1$:
    0000 F0 41                 9 	LDH	A,(.STAT)
-   0002 E6 02                10 	AND	#0x02
+   0002 E6 40                10 	AND	#0x40
    0004 20 FA                11 	JR	NZ,1$
                              12 
    0006 70                   13 	LD	(HL),B
@@ -179,8 +179,8 @@
    000D C9                   19 	RET
                              20 	;; Initialize window tile table with B
    000E                      21 .init_wtt::
-   000E F0 40                22 	LDH	A,(.LCDC)
-   0010 CB 77                23 	BIT	6,A
+   000E F0 4E                22 	LDH	A,(.LCDC)
+   0010 CB 4F                23 	BIT	1,A
    0012 20 05                24 	JR	NZ,1$
    0014 21 00 98             25 	LD	HL,#0x9800	; HL = origin
    0017 18 13                26 	JR	.init_tt
@@ -189,8 +189,8 @@
    001C 18 0E                29 	JR	.init_tt
                              30 	;; Initialize background tile table with B
    001E                      31 .init_btt::
-   001E F0 40                32 	LDH	A,(.LCDC)
-   0020 CB 5F                33 	BIT	3,A
+   001E F0 4E                32 	LDH	A,(.LCDC)
+   0020 CB 67                33 	BIT	4,A
    0022 20 05                34 	JR	NZ,1$
    0024 21 00 98             35 	LD	HL,#0x9800	; HL = origin
    0027 18 03                36 	JR	.init_tt

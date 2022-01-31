@@ -15,7 +15,7 @@ Symbol Table
   1 _IE_REG                            FFFF GR
   1 _IF_REG                            FF0F GR
   1 _KEY1_REG                          FF4D GR
-  1 _LCDC_REG                          FF40 GR
+  1 _LCDC_REG                          FF4E GR
   1 _LYC_REG                           FF45 GR
   1 _LY_REG                            FF44 GR
   1 _NR10_REG                          FF10 GR

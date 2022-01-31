@@ -60,7 +60,7 @@
                     0024     59 	.NR50		= 0x24	; Sound register
                     0025     60 	.NR51		= 0x25	; Sound register
                     0026     61 	.NR52		= 0x26	; Sound register
-                    0040     62 	.LCDC		= 0x40	; LCD control
+                    004E     62 	.LCDC		= 0x4E	; LCD control
                     0041     63 	.STAT		= 0x41	; LCD status
                     0042     64 	.SCY		= 0x42	; Scroll Y
                     0043     65 	.SCX		= 0x43	; Scroll X

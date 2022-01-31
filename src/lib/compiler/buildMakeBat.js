@@ -7,7 +7,7 @@ export default async (buildRoot, { CART_TYPE, CART_SIZE, customColorsEnabled, gb
   const objFiles = [];
   let musicFiles = [];
 
-  const CC = `..\\_gbs\\gbdk\\bin\\lcc -Wa-l -Wl-m -Wl-j -Wl-yt${CART_TYPE} -Iinclude`;
+  const CC = `..\\_gbs_analogue\\gbdk\\bin\\lcc -Wa-l -Wl-m -Wl-j -Wl-yt${CART_TYPE} -Iinclude`;
   const CFLAGS = `-DUSE_SFR_FOR_REG -Wl-yo${CART_SIZE} -Wl-ya4`;
   const CGBFLAGS = `-Wl-yp0x143=0x80`;
 
@@ -53,9 +53,9 @@ export default async (buildRoot, { CART_TYPE, CART_SIZE, customColorsEnabled, gb
   }
 
   if (customColorsEnabled || gbcFastCPUEnabled) {
-    cmds.push(`${CC} ${CFLAGS} ${CGBFLAGS} -o build/rom/game.gb ${objFiles.join(" ")}`);
+    cmds.push(`${CC} ${CFLAGS} ${CGBFLAGS} -o build/rom/game.pocket ${objFiles.join(" ")}`);
   } else {
-    cmds.push(`${CC} ${CFLAGS} -o build/rom/game.gb ${objFiles.join(" ")}`);
+    cmds.push(`${CC} ${CFLAGS} -o build/rom/game.pocket ${objFiles.join(" ")}`);
   }
 
   return cmds.join("\n");

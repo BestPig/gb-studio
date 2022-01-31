@@ -75,7 +75,7 @@ const makeBuild = ({
     }`;
 
     const tmpPath = getTmp();
-    const tmpBuildToolsPath = `${tmpPath}/_gbs`;
+    const tmpBuildToolsPath = `${tmpPath}/_gbs_analogue`;
 
     // Symlink build tools so that path doesn't contain any spaces
     // GBDKDIR doesn't work if path has spaces :-(
@@ -168,7 +168,7 @@ const makeBuild = ({
     child.on("close", async code => {
       if (code === 0) {
         await setROMTitle(
-          `${buildRoot}/build/rom/game.gb`,
+          `${buildRoot}/build/rom/game.pocket`,
           data.name.toUpperCase()
         );
         resolve();

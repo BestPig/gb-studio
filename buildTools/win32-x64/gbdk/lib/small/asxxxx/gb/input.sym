@@ -32,7 +32,7 @@ Symbol Table
     .KBDSIZE                        =  1006 
     .KBDWINPOSY                     =  0008 
     .KEY1                           =  004D 
-    .LCDC                           =  0040 
+    .LCDC                           =  004E 
     .LCD_IFLAG                      =  0002 
     .LEFT                           =  0002 
     .LY                             =  0044 

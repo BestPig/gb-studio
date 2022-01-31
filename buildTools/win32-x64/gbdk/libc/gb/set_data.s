@@ -8,7 +8,7 @@
 _set_bkg_data::
 _set_win_data::
 	LDH	A,(.LCDC)
-	BIT	4,A
+	BIT	3,A
 	JP	NZ,_set_sprite_data
 
 	PUSH	BC
@@ -61,7 +61,7 @@ _set_win_data::
 	RES	4,H		; Switch to 0x8800
 4$:
 	LDH	A,(.STAT)
-	AND	#0x02
+	AND	#0x40
 	JR	NZ,4$
 
 	LD	A,(BC)

@@ -60,7 +60,7 @@
                     0024     59 	.NR50		= 0x24	; Sound register
                     0025     60 	.NR51		= 0x25	; Sound register
                     0026     61 	.NR52		= 0x26	; Sound register
-                    0040     62 	.LCDC		= 0x40	; LCD control
+                    004E     62 	.LCDC		= 0x4E	; LCD control
                     0041     63 	.STAT		= 0x41	; LCD status
                     0042     64 	.SCY		= 0x42	; Scroll Y
                     0043     65 	.SCX		= 0x43	; Scroll X
@@ -193,7 +193,7 @@
    0015 5F                   33 	LD	E,A		; A = first BCPS data
    0016                      34 1$:
    0016 F0 41                35 	LDH	A,(.STAT)
-   0018 E6 02                36 	AND	#0x02
+   0018 E6 40                36 	AND	#0x40
    001A 20 FA                37 	JR	NZ,1$
                              38 
    001C 7B                   39 	LD	A,E
@@ -237,7 +237,7 @@
    0040 5F                   77 	LD	E,A		; A = first BCPS data
    0041                      78 1$:
    0041 F0 41                79 	LDH	A,(.STAT)
-   0043 E6 02                80 	AND	#0x02
+   0043 E6 40                80 	AND	#0x40
    0045 20 FA                81 	JR	NZ,1$
                              82 
    0047 7B                   83 	LD	A,E
@@ -278,7 +278,7 @@
                             118 
    0012                     119 1$:
    0012 F0 41               120 	LDH	A,(.STAT)
-   0014 E6 02               121 	AND	#0x02
+   0014 E6 40               121 	AND	#0x40
    0016 20 FA               122 	JR	NZ,1$
                             123 
    0018 7B                  124 	LD	A,E
@@ -319,7 +319,7 @@
                             159 
    003A                     160 1$:
    003A F0 41               161 	LDH	A,(.STAT)
-   003C E6 02               162 	AND	#0x02
+   003C E6 40               162 	AND	#0x40
    003E 20 FA               163 	JR	NZ,1$
                             164 
    0040 7B                  165 	LD	A,E

@@ -66,7 +66,7 @@
 
 	;; Turn the screen off
 	LDH	A,(.LCDC)
-	BIT	7,A
+	BIT	0,A
 	JR	Z,1$
 
 	;; Turn the screen off
@@ -113,7 +113,7 @@
 	LDH	(.OBP0),A
 
 	;; Turn the screen on
-	LD	A,#0b11000001	; LCD		= On
+	LD	A,#0b10000011	; LCD		= On
 				; WindowBank	= 0x9C00
 				; Window	= Off
 				; BG Chr	= 0x8800
@@ -314,7 +314,7 @@
 	JR	1$
 3$:
 	LDH	A,(.LCDC)
-	AND	#0b11011111	; Window = Off
+	AND	#0b11111011	; Window = Off
 	LDH	(.LCDC),A
 	POP	DE
 	POP	BC
@@ -383,13 +383,13 @@
 	LD	(.msy),A
 	CALL	.set_mouse
 	LDH	A,(.LCDC)
-	OR	#0b00000010	; OBJ = On
+	OR	#0b01000000	; OBJ = On
 	LDH	(.LCDC),A
 	RET
 
 .hide_mouse:
 	LDH	A,(.LCDC)
-	AND	#0b11111101	; OBJ = Off
+	AND	#0b10111111	; OBJ = Off
 	LDH	(.LCDC),A
 	RET
 

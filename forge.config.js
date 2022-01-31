@@ -31,8 +31,8 @@ module.exports = {
     ]
   },
   electronWinstallerConfig: {
-    name: "gb_studio",
-    exe: "gb-studio.exe",
+    name: "gb_studio-analogue",
+    exe: "gb-studio-analogue.exe",
     loadingGif: "src/assets/app/install.gif"
   },
   electronInstallerDebian: {},

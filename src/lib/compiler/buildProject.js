@@ -67,8 +67,8 @@ const buildProject = async (
   if (buildType === "web") {
     await copy(emulatorRoot, `${outputRoot}/build/web`);
     await copy(
-      `${outputRoot}/build/rom/game.gb`,
-      `${outputRoot}/build/web/rom/game.gb`
+      `${outputRoot}/build/rom/game.pocket`,
+      `${outputRoot}/build/web/rom/game.pocket`
     );
     const sanitize = s => String(s || "").replace(/["<>]/g, "");
     const projectName = sanitize(data.name);

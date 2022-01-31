@@ -614,7 +614,7 @@ _posy::				; Banked
 	LD	D,#0x20		; D = width
 2$:
 	LDH	A,(.STAT)
-	AND	#0x02
+	AND	#0x40
 	JR	NZ,2$
 
 	LD	A,(BC)
@@ -628,7 +628,7 @@ _posy::				; Banked
 	LD	D,#0x20
 3$:
 	LDH	A,(.STAT)
-	AND	#0x02
+	AND	#0x40
 	JR	NZ,3$
 
 	LD	A,#.SPACE
@@ -660,7 +660,7 @@ _posy::				; Banked
 
 	;; Turn the screen off
 	LDH	A,(.LCDC)
-	BIT	7,A
+	BIT	0,A
 	JR	Z,1$
 
 	;; Turn the screen off

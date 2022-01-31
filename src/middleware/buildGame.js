@@ -64,7 +64,7 @@ export default store => next => async action => {
                   `${projectRoot}/build/web/index.html`
                 )}`
               : `ROM is ready at ${Path.normalize(
-                  `${projectRoot}/build/rom/game.gb`
+                  `${projectRoot}/build/rom/game.pocket`
                 )}`
           }`
         });

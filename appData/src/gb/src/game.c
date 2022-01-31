@@ -52,7 +52,7 @@ int main()
   add_VBL(vbl_update);
 
   // Init LCD
-  LCDC_REG = 0x67;
+  LCDC_REG = 0xE6;
   set_interrupts(VBL_IFLAG | LCD_IFLAG);
   enable_interrupts();
 

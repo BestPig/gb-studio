@@ -101,7 +101,7 @@ __REG IE_REG		; /* Interrupt enable */
 #define NR50_REG	(*(__REG)0xFF24)	/* Sound register */
 #define NR51_REG	(*(__REG)0xFF25)	/* Sound register */
 #define NR52_REG	(*(__REG)0xFF26)	/* Sound register */
-#define LCDC_REG	(*(__REG)0xFF40)	/* LCD control */
+#define LCDC_REG	(*(__REG)0xFF4E)	/* LCD control */
 #define STAT_REG	(*(__REG)0xFF41)	/* LCD status */
 #define SCY_REG		(*(__REG)0xFF42)	/* Scroll Y */
 #define SCX_REG		(*(__REG)0xFF43)	/* Scroll X */

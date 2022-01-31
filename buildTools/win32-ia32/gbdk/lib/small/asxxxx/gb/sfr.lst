@@ -87,9 +87,9 @@
    FF26                      87 	.org	0xFF26
    FF26                      88 _NR52_REG::	; Sound register */
    FF26                      89 	.ds	1
-   FF40                      90 	.org	0xFF40
-   FF40                      91 _LCDC_REG::	; LCD control */
-   FF40                      92 	.ds	1
+   FF4E                      90 	.org	0xFF4E
+   FF4E                      91 _LCDC_REG::	; LCD control */
+   FF4E                      92 	.ds	1
    FF41                      93 	.org	0xFF41
    FF41                      94 _STAT_REG::	; LCD status */
    FF41                      95 	.ds	1

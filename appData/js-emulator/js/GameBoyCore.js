@@ -9,6 +9,17 @@
 
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
+function reverseBits(value) {
+	let ret = 0;
+	for (let i = 0; i < 8; i++) {
+		ret |= ((value >> i) & 1) << (7 - i);
+	}
+
+	return ret >>> 0;
+}
+
+
 function GameBoyCore(canvas, ROMImage) {
 	//Params, etc...
 	this.canvas = canvas;						//Canvas DOM object for drawing out the graphics to.
@@ -7740,13 +7751,14 @@ GameBoyCore.prototype.memoryReadJumpCompile = function () {
 						return (parentObj.channel3canPlay) ? parentObj.memory[0xFF00 | (parentObj.channel3lastSampleLookup >> 1)] : parentObj.memory[0xFF00 | address];
 					}
 					break;
-				case 0xFF40:
-					this.memoryHighReader[0x40] = this.memoryHighReadNormal;
-					this.memoryReader[0xFF40] = this.memoryReadNormal;
+				case 0xFF4E:
+					this.memoryHighReader[0x4E] = this.memoryReader[0xFF4E] = function (parentObj, address) {
+						return reverseBits(parentObj.memory[0xFF4E]);
+					}
 					break;
 				case 0xFF41:
 					this.memoryHighReader[0x41] = this.memoryReader[0xFF41] = function (parentObj, address) {
-						return 0x80 | parentObj.memory[0xFF41] | parentObj.modeSTAT;
+						return reverseBits(0x80 | parentObj.memory[0xFF41] | parentObj.modeSTAT);
 					}
 					break;
 				case 0xFF42:
@@ -7788,9 +7800,6 @@ GameBoyCore.prototype.memoryReadJumpCompile = function () {
 				case 0xFF4D:
 					this.memoryHighReader[0x4D] = this.memoryHighReadNormal;
 					this.memoryReader[0xFF4D] = this.memoryReadNormal;
-					break;
-				case 0xFF4E:
-					this.memoryHighReader[0x4E] = this.memoryReader[0xFF4E] = this.memoryReadBAD;
 					break;
 				case 0xFF4F:
 					this.memoryHighReader[0x4F] = this.memoryReader[0xFF4F] = function (parentObj, address) {
@@ -9126,8 +9135,9 @@ GameBoyCore.prototype.recompileModelSpecificIOWriteHandling = function () {
 				parentObj.serialShiftTimer = parentObj.serialShiftTimerAllocated = parentObj.serialTimer = 0;	//Zero the timers, since we're emulating as if nothing is connected.
 			}
 		}
-		this.memoryHighWriter[0x40] = this.memoryWriter[0xFF40] = function (parentObj, address, data) {
-			if (parentObj.memory[0xFF40] != data) {
+		this.memoryHighWriter[0x4E] = this.memoryWriter[0xFF4E] = function (parentObj, address, ndata) {
+			let data = reverseBits(ndata)
+			if (parentObj.memory[0xFF4E] != data) {
 				parentObj.midScanLineJIT();
 				var temp_var = (data > 0x7F);
 				if (temp_var != parentObj.LCDisOn) {
@@ -9156,10 +9166,11 @@ GameBoyCore.prototype.recompileModelSpecificIOWriteHandling = function () {
 				parentObj.gfxSpriteShow = ((data & 0x02) == 0x02);
 				parentObj.BGPriorityEnabled = ((data & 0x01) == 0x01);
 				parentObj.priorityFlaggingPathRebuild();	//Special case the priority flagging as an optimization.
-				parentObj.memory[0xFF40] = data;
+				parentObj.memory[0xFF4E] = data;
 			}
 		}
-		this.memoryHighWriter[0x41] = this.memoryWriter[0xFF41] = function (parentObj, address, data) {
+		this.memoryHighWriter[0x41] = this.memoryWriter[0xFF41] = function (parentObj, address, ndata) {
+			let data = reverseBits(ndata)
 			parentObj.LYCMatchTriggerSTAT = ((data & 0x40) == 0x40);
 			parentObj.mode2TriggerSTAT = ((data & 0x20) == 0x20);
 			parentObj.mode1TriggerSTAT = ((data & 0x10) == 0x10);
@@ -9312,8 +9323,9 @@ GameBoyCore.prototype.recompileModelSpecificIOWriteHandling = function () {
 				parentObj.serialShiftTimer = parentObj.serialShiftTimerAllocated = parentObj.serialTimer = 0;	//Zero the timers, since we're emulating as if nothing is connected.
 			}
 		}
-		this.memoryHighWriter[0x40] = this.memoryWriter[0xFF40] = function (parentObj, address, data) {
-			if (parentObj.memory[0xFF40] != data) {
+		this.memoryHighWriter[0x4E] = this.memoryWriter[0xFF4E] = function (parentObj, address, ndata) {
+			let data = reverseBits(ndata)
+			if (parentObj.memory[0xFF4E] != data) {
 				parentObj.midScanLineJIT();
 				var temp_var = (data > 0x7F);
 				if (temp_var != parentObj.LCDisOn) {
@@ -9341,10 +9353,11 @@ GameBoyCore.prototype.recompileModelSpecificIOWriteHandling = function () {
 				parentObj.gfxSpriteNormalHeight = ((data & 0x04) == 0);
 				parentObj.gfxSpriteShow = (data & 0x02) == 0x02;
 				parentObj.bgEnabled = ((data & 0x01) == 0x01);
-				parentObj.memory[0xFF40] = data;
+				parentObj.memory[0xFF4E] = data;
 			}
 		}
-		this.memoryHighWriter[0x41] = this.memoryWriter[0xFF41] = function (parentObj, address, data) {
+		this.memoryHighWriter[0x41] = this.memoryWriter[0xFF41] = function (parentObj, address, ndata) {
+			let data = reverseBits(ndata);
 			parentObj.LYCMatchTriggerSTAT = ((data & 0x40) == 0x40);
 			parentObj.mode2TriggerSTAT = ((data & 0x20) == 0x20);
 			parentObj.mode1TriggerSTAT = ((data & 0x10) == 0x10);
@@ -9533,3 +9546,4 @@ GameBoyCore.prototype.getTypedArray = function (length, defaultValue, numberType
 	}
 	return arrayHandle;
 }
+

@@ -87,7 +87,7 @@ _NR51_REG::	; Sound register */
 	.org	0xFF26
 _NR52_REG::	; Sound register */
 	.ds	1
-	.org	0xFF40
+	.org	0xFF4E
 _LCDC_REG::	; LCD control */
 	.ds	1
 	.org	0xFF41
